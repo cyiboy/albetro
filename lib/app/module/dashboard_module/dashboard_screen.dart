@@ -1,9 +1,10 @@
 import 'package:albetro/app/core/theme/color_theme.dart';
 import 'package:albetro/app/module/dashboard_module/book_screen.dart';
-import 'package:albetro/app/module/dashboard_module/trip_screen.dart';
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../trip_module/trip_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override

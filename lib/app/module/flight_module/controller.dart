@@ -15,7 +15,11 @@ TextEditingController inssuing_country =  TextEditingController();
 TextEditingController dob =  TextEditingController();
 TextEditingController expiry =  TextEditingController();
 TextEditingController expiry_card =  TextEditingController();
+RxBool loading = true.obs;
 
-
+Future<void> delayedMove({int milli = 2000, String? to}) async {
+  await Future.delayed(Duration(milliseconds: milli));
+  loading.value = false;
+}
 
 }

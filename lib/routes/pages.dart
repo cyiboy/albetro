@@ -4,6 +4,7 @@ import 'package:albetro/app/module/flight_module/flight_search_screen.dart';
 import 'package:albetro/app/module/flight_module/pay_by_card.dart';
 import 'package:albetro/app/module/flight_module/review_and_pay.dart';
 import 'package:albetro/app/module/flight_module/traveller_details.dart';
+import 'package:albetro/app/module/trip_module/trip_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -22,5 +23,6 @@ class AppPages {
     GetPage(name: Routes.PAYCARD, page: () => PayCard()),
     GetPage(name: Routes.PROCESSING, page: () => Processing()),
     GetPage(name: Routes.REVIEWPAY, page: () => ReviewPay()),
+    GetPage(name: Routes.TRIPDETAILS, page: () => TripInfo()),
   ];
 }
