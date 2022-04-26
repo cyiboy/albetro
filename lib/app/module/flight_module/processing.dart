@@ -67,7 +67,7 @@ class _ProcessingState extends State<Processing> {
                           children: [
                             GestureDetector(
                               onTap: (){
-                                Get.toNamed( Routes.DASHBOARD);
+                                Get.offAllNamed( Routes.DASHBOARD);
                               },
                               child: SvgPicture.asset(
                                 'assets/svg/close.svg',

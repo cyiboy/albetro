@@ -47,21 +47,25 @@ class _TravellersDetailsState extends State<TravellersDetails> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 0, top: 10, bottom: 15),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset('assets/svg/info.svg',
-                            color: Surface.withOpacity(0.5),
-                          ),
-                          Space.X(10),
-                          Text(
-                            'These details must match passport and photo ID',
-                            style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
-                                color:Surface),
-                          ),
-                        ],
+                      child: Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/svg/info.svg',
+                              color: Surface.withOpacity(0.5),
+                            ),
+                            Space.X(10),
+                            Text(
+                              'These details must match passport and photo ID',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 14,
+                                  color:Surface),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 
@@ -327,7 +331,7 @@ class _TravellersDetailsState extends State<TravellersDetails> {
                               ),
                             ),
                             Text(
-                              '₹ 50,760',
+                              P.flight.airline![0].price!,
                               style: TextStyle(
                                 color: textColor,
                                 fontSize: 16,

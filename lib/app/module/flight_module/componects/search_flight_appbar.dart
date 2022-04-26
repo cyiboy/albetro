@@ -1,9 +1,11 @@
+import 'package:albetro/app/core/p.dart';
 import 'package:albetro/app/global_widgets/space.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/theme/color_theme.dart';
 
@@ -30,7 +32,7 @@ class FlightAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'DEL',
+                  P.dashboard.flightModel!.from!.iata_code!,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -42,7 +44,7 @@ class FlightAppBar extends StatelessWidget implements PreferredSizeWidget {
                     semanticsLabel: 'A red up arrow'),
                 Space.X(10),
                 Text(
-                  'DEL',
+                    P.dashboard.flightModel!.to!.iata_code!,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -51,7 +53,9 @@ class FlightAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             Text(
-              '15 Oct . 1 Adult . Economy',
+              DateFormat('EEEE, d MMM').format(P.dashboard.flightModel!.date!)+
+
+              ' . '+P.dashboard.flightModel!.adult.toString()+' Adult . '+P.dashboard.flightModel!.classs!,
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 12,

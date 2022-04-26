@@ -1,4 +1,6 @@
+import 'package:albetro/app/data/models/flight_details_model.dart';
 import 'package:albetro/app/global_widgets/space.dart';
+import 'package:albetro/app/module/flight_module/flight_details.dart';
 import 'package:albetro/routes/pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,17 +9,10 @@ import 'package:get/get.dart';
 import '../../../core/theme/color_theme.dart';
 
 class FLightCard extends StatelessWidget {
-  String location;
-  String flight_type;
-  String time;
-  String total_time;
-  String price;
-  String airline;
 
-  FLightCard(this.location, this.flight_type, this.time, this.total_time,
-      this.price, this.airline,
-      {Key? key})
-      : super(key: key);
+ FlightDetailModel flightDetails;
+
+ FLightCard(this.flightDetails, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +20,7 @@ class FLightCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10.0),
       child: GestureDetector(
         onTap: (){
+
           Get.toNamed( Routes.FLIGHTDETAILS);
         },
         child: Container(
@@ -45,7 +41,7 @@ class FLightCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        location,
+                        flightDetails.path!,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
@@ -53,7 +49,7 @@ class FLightCard extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        flight_type,
+                        'FASTEST',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
@@ -69,7 +65,7 @@ class FLightCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            time,
+                            flightDetails.time!,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
@@ -77,7 +73,7 @@ class FLightCard extends StatelessWidget {
                           ),
                           Space.Y(10),
                           Text(
-                            total_time,
+                            flightDetails.date! +' • Direct',
                             style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 14,
@@ -87,7 +83,7 @@ class FLightCard extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        price,
+                        flightDetails.price!,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
@@ -102,7 +98,7 @@ class FLightCard extends StatelessWidget {
                       Image.asset('assets/images/logo.png', height: 24,),
                     Space.X(20),
                       Text(
-                        airline,
+                        flightDetails.airline!,
                         style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 12,

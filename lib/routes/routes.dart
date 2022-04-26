@@ -11,4 +11,5 @@ abstract class Routes{
   static const PAYCARD = '/paycard';
   static const REVIEWPAY = '/reviewpay';
   static const TRIPDETAILS = '/tripdetails';
+  static const MAPVIEW = '/MAPVIEW';
 }

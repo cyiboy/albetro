@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/pages.dart';
+import '../../core/p.dart';
 import '../../core/theme/color_theme.dart';
 import '../../global_widgets/button.dart';
 import '../../global_widgets/custom_appbar.dart';
@@ -351,7 +352,7 @@ class _ReviewPayState extends State<ReviewPay> {
                                     Spacer(),
 
                                     Text(
-                                      '₹20,168',
+                                      P.flight.airline![0].price!,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
@@ -373,7 +374,7 @@ class _ReviewPayState extends State<ReviewPay> {
                                     Spacer(),
 
                                     Text(
-                                      '₹20,168',
+                                      P.flight.airline![0].price!,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
@@ -400,7 +401,7 @@ class _ReviewPayState extends State<ReviewPay> {
                                     Spacer(),
 
                                     Text(
-                                      '₹20,168',
+                                      P.flight.airline![0].price!,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
@@ -427,7 +428,7 @@ class _ReviewPayState extends State<ReviewPay> {
                                     Spacer(),
 
                                     Text(
-                                      '₹20,168',
+                                      P.flight.airline![0].price!,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
@@ -454,7 +455,7 @@ class _ReviewPayState extends State<ReviewPay> {
                                     Spacer(),
 
                                     Text(
-                                      '₹20,168',
+                                      P.flight.airline![0].price!,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 24,
@@ -508,7 +509,7 @@ class _ReviewPayState extends State<ReviewPay> {
                               ),
                             ),
                             Text(
-                              '₹ 50,760',
+                              P.flight.airline![0].price!,
                               style: TextStyle(
                                 color: textColor,
                                 fontSize: 16,

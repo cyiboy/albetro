@@ -40,25 +40,28 @@ class _BoolingCardState extends State<BoolingCard> with TickerProviderStateMixin
                       ),
                       color: cards,
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: TabBar(
-                              labelPadding: const EdgeInsets.only(
-                                  left: 30, right: 20),
-                              controller: _tabController,
-                              labelColor: Primary,
-                              unselectedLabelColor: Colors.grey,
-                              isScrollable: true,
-                              indicatorColor: cards,
-                              tabs: [
-                                Tab(text: "Oneway"),
-                                Tab(text: "Round Trip"),
-                                Tab(text: "Multi-city"),
-                              ]),
-                        ),
-                      ],
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: TabBar(
+                                labelPadding: const EdgeInsets.only(
+                                    left: 30, right: 20),
+                                controller: _tabController,
+                                labelColor: Primary,
+                                unselectedLabelColor: Colors.grey,
+                                isScrollable: true,
+                                indicatorColor: cards,
+                                tabs: [
+                                  Tab(text: "Oneway"),
+                                  Tab(text: "Round Trip"),
+                                  Tab(text: "Multi-city"),
+                                ]),
+                          ),
+                        ],
+                      ),
                     ),
                   )),
               Positioned(
@@ -104,6 +107,16 @@ class _BoolingCardState extends State<BoolingCard> with TickerProviderStateMixin
                                               .withOpacity(0.3)),
                                     ),
                                     Space.Y(10),
+                                    P.dashboard.flyingFrom != null?
+                                    Text(
+                                      P.dashboard.flyingFrom!.iata_code!,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: textColor),
+                                    ):
                                     Text(
                                       'Select City',
                                       textAlign: TextAlign.center,
@@ -112,7 +125,8 @@ class _BoolingCardState extends State<BoolingCard> with TickerProviderStateMixin
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
                                           color: textColor),
-                                    ),
+                                    )
+                                    ,
                                   ],
                                 ),
                                 Spacer(),
@@ -133,8 +147,17 @@ class _BoolingCardState extends State<BoolingCard> with TickerProviderStateMixin
                                               .withOpacity(0.3)),
                                     ),
                                     Space.Y(10),
+                                    P.dashboard.flyingTo!= null?
                                     Text(
-                                      'Select City',
+                                      P.dashboard.flyingTo!.iata_code!  ,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: textColor),
+                                    ):Text(
+                                        'Select City',
                                       textAlign: TextAlign.center,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -142,6 +165,8 @@ class _BoolingCardState extends State<BoolingCard> with TickerProviderStateMixin
                                           fontSize: 14,
                                           color: textColor),
                                     ),
+
+
                                   ],
                                 ),
                               ],

@@ -1,28 +1,60 @@
+import 'dart:async';
+
 import 'package:albetro/app/core/theme/color_theme.dart';
 import 'package:albetro/app/global_widgets/button.dart';
 import 'package:albetro/app/global_widgets/custom_appbar.dart';
 import 'package:albetro/app/global_widgets/space.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_curved_line/maps_curved_line.dart';
 
 import '../../../routes/pages.dart';
+import '../../core/p.dart';
 import 'componects/filght_card.dart';
 
-class FlightDetails extends StatelessWidget {
- Map i =
-    {
-      'location': 'DEL -JFK',
-      'flight_type': ' FASTEST',
-      'time': '23:45 - 4:30',
-      'total_time': '15h 15m • Direct',
-      'price': '14,168',
-      'airline': 'United Airlines UA 802'
-    }
-  ;
+class FlightDetails extends StatefulWidget {
+  @override
+  State<FlightDetails> createState() => _FlightDetailsState();
+}
+
+class _FlightDetailsState extends State<FlightDetails> {
+  String _mapStyle = '';
+  void initState() {
+    super.initState();
+
+    rootBundle.loadString('assets/style/map_style.json').then((string) {
+      _mapStyle = string;
+    });
+  }
+
+  final Completer<GoogleMapController> _controller = Completer();
+  late GoogleMapController mapController;
+  LatLng _point1 = LatLng(P.dashboard.flyingFrom!.lat!, P.dashboard.flyingFrom!.lng!);
+  LatLng _point2 = LatLng(P.dashboard.flyingTo!.lat!, P.dashboard.flyingTo!.lng!);
+  final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(P.dashboard.flyingFrom!.lat!, P.dashboard.flyingFrom!.lng!),
+
+    zoom: 10.4746,
+  );
+  final Set<Polyline> _polylines = Set();
+
   @override
   Widget build(BuildContext context) {
+    _polylines.add(
+        Polyline(
+          polylineId: PolylineId("line 1"),
+          visible: true,
+          width: 2,
+          //latlng is List<LatLng>
+          patterns: [PatternItem.dash(30), PatternItem.gap(10)],
+          points: MapsCurvedLines.getPointsOnCurve(_point1, _point2), // Invoke lib to get curved line points
+          color: Primary,
+        )
+    );
     return Scaffold(
       backgroundColor: Surface,
       appBar: CustomAppBar(
@@ -54,7 +86,7 @@ class FlightDetails extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Indra Gandhi (DEL), New Delhi, India',
+                                P.dashboard.flyingFrom!.name!,
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14,
@@ -62,22 +94,17 @@ class FlightDetails extends StatelessWidget {
                               ),
                               Space.Y(5),
                               Text(
-                                'Indra Gandhi (DEL), New Delhi, India',
+                                P.dashboard.flyingFrom!.slug?? '',
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 12,
                                     color: textColor.withOpacity(0.5)),
                               ),
                               Space.Y(10),
-                              FLightCard(i['location'],
-                                  i['flight_type'],
-                                  i['time'],
-                                  i['total_time'],
-                                  i['price'],
-                                  i['airline']),
+                              FLightCard( P.flight.airline![0]),
                               Space.Y(10),
                               Text(
-                                'Indra Gandhi (DEL), New Delhi, India',
+                                P.dashboard.flyingTo!.name!,
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14,
@@ -85,7 +112,7 @@ class FlightDetails extends StatelessWidget {
                               ),
                               Space.Y(5),
                               Text(
-                                'Indra Gandhi (DEL), New Delhi, India',
+                                P.dashboard.flyingTo!.slug??'',
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 12,
@@ -99,6 +126,57 @@ class FlightDetails extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    Space.Y(20),
+                    Container(
+                      height: 180,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        color: cards,
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: GoogleMap(
+                              mapType: MapType.normal,
+                              initialCameraPosition: _kGooglePlex,
+                              polylines: _polylines,
+                              onMapCreated: (GoogleMapController controller) {
+                                mapController = controller;
+
+                                mapController.setMapStyle(_mapStyle);
+
+                                _controller.complete(controller);
+                              },
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              child: GestureDetector(
+                                onTap: (){ Get.toNamed( Routes.MAPVIEW);},
+                                child: Center(
+                                  child:   Text(
+                                    'View More',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                        color: Primary),
+                                  ),
+                                ),
+                              )
+                            ),
+                          )
+                        ],
+                      )
+
                     ),
                     Space.Y(20),
                     Container(
@@ -203,7 +281,7 @@ class FlightDetails extends StatelessWidget {
                                   'What all you can take?',
                                   style: TextStyle(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: 24,
+                                      fontSize: 20,
                                       color: textColor),
                                 ),
                                 Space.Y(20),
@@ -379,7 +457,7 @@ class FlightDetails extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '₹ 50,760',
+                              P.flight.airline![0].price!,
                               style: TextStyle(
                                 color: textColor,
                                 fontSize: 16,

@@ -1,11 +1,14 @@
 
-class DashboardRepository {
-  // static ApiProvider _provider = ApiProvider();
+import '../../core/utils/responses.dart';
+import '../../data/provider/api_service.dart';
 
-  // static Future<Responses> certificate(token, id) async {
-  //   final response = await _provider.getCertificate(token, id);
-  //   return  response;
-  // }
+class DashboardRepository {
+  static ApiProvider _provider = ApiProvider();
+
+  static Future<Responses> getCity(city) async {
+    final response = await _provider.getCity(city);
+    return  response;
+  }
 
 
 

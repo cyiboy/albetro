@@ -1,79 +1,39 @@
+import 'package:albetro/app/core/p.dart';
 import 'package:albetro/app/core/theme/color_theme.dart';
+import 'package:albetro/app/data/models/flight_details_model.dart';
 import 'package:albetro/app/global_widgets/info_card.dart';
 import 'package:albetro/app/global_widgets/space.dart';
 import 'package:albetro/app/module/flight_module/componects/filght_card.dart';
 import 'package:albetro/app/module/flight_module/componects/search_flight_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-class FlightSearch extends StatelessWidget {
-  List flight = [{
-  'location' : 'DEL -JFK',
- 'flight_type': ' FASTEST',
-  'time':'23:45 - 4:30',
-   'total_time': '15h 15m • Direct',
-  'price':'14,168',
-   'airline': 'United Airlines UA 802'
-  },
-    {
-      'location' : 'DEL - EWR',
-      'flight_type': 'CHEAPEST',
-      'time':'23:45 - 4:30',
-      'total_time': '15h 15m • Direct',
-      'price':'₹ 50,760',
-      'airline': 'Air India AI 101'
-    },
-    {
-      'location' : 'DEL -JFK',
-      'flight_type': ' FASTEST',
-      'time':'23:45 - 4:30',
-      'total_time': '15h 15m • Direct',
-      'price':'14,168',
-      'airline': 'United Airlines UA 802'
-    },
-    {
-      'location' : 'DEL - EWR',
-      'flight_type': 'CHEAPEST',
-      'time':'23:45 - 4:30',
-      'total_time': '15h 15m • Direct',
-      'price':'₹ 50,760',
-      'airline': 'Air India AI 101'
-    },
-    {
-      'location' : 'DEL -JFK',
-      'flight_type': ' FASTEST',
-      'time':'23:45 - 4:30',
-      'total_time': '15h 15m • Direct',
-      'price':'14,168',
-      'airline': 'United Airlines UA 802'
-    },
+class FlightSearch extends StatefulWidget {
+  @override
+  State<FlightSearch> createState() => _FlightSearchState();
+}
 
-    {
-      'location' : 'DEL - EWR',
-      'flight_type': 'CHEAPEST',
-      'time':'23:45 - 4:30',
-      'total_time': '15h 15m • Direct',
-      'price':'₹ 50,760',
-      'airline': 'Air India AI 101'
-    },
-    {
-      'location' : 'DEL -JFK',
-      'flight_type': ' FASTEST',
-      'time':'23:45 - 4:30',
-      'total_time': '15h 15m • Direct',
-      'price':'14,168',
-      'airline': 'United Airlines UA 802'
-    },
+class _FlightSearchState extends State<FlightSearch> {
 
 
-  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    P.flight.getFlight();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Surface,
       appBar: FlightAppBar(title: '',),
       body: SingleChildScrollView(
-        child: Container(
+        child: Obx(
+      () => Container(
           child: Column(
             children: [
               Divider(
@@ -82,13 +42,38 @@ class FlightSearch extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(30.0),
-                child: Column(
+                child: P.flight.loading.value?Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/loading_logo.png',width: 150, height: 300,),
+                    Space.Y(50),
+                    Text(
+                      ' Keep your seatbelt fastened!',
+
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: textColor),
+                    ),
+                    Space.Y(10),
+                    Text(
+                      'Looking for best flights',
+
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                          color: textColor.withOpacity(0.3)),
+                    ),
+
+                  ],
+                ):
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InfoCard('Check COVID-19 airline measures before you go', color: Primary,),
                     Space.Y(30),
                     Text(
-                      'Showing 20 Direct Flights',
+                      'Showing '+ P.flight.flight.length.toString()+' Direct Flights',
 
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
@@ -96,13 +81,41 @@ class FlightSearch extends StatelessWidget {
                           color: textColor.withOpacity(0.3)),
                     ),
                     Space.Y(20),
-                    for( final i in flight)
-                    FLightCard(i['location'],
-                        i['flight_type'],
-                        i['time'],
-                        i['total_time'],
-                        i['price'],
-                        i['airline'])
+                    //for( final i in flight)
+                      P.flight.flight.isEmpty?
+                   Container(
+                     child: Center(
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.center,
+                         children: [
+                           Image.asset('assets/images/loading_logo.png',width: 150, height: 300,),
+                           Space.Y(50),
+                           Text(
+                           ' No Available flight to Destination',
+
+                             style: TextStyle(
+                                 fontWeight: FontWeight.bold,
+                                 fontSize: 14,
+                                 color: textColor),
+                           ),
+
+                         ],
+                       ),
+                     ),
+                   ):
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: P.flight.airline!.obs.length,
+                        itemBuilder: (context, index) {
+
+                          return GestureDetector(
+                              onTap: () async {
+                              },
+                              child:FLightCard(P.flight.airline![index]));
+                        },
+                      ),
+
 
                   ],
                 ),
@@ -112,6 +125,6 @@ class FlightSearch extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }
