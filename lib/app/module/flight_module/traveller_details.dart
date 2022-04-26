@@ -55,14 +55,16 @@ class _TravellersDetailsState extends State<TravellersDetails> {
                               color: Surface.withOpacity(0.5),
                             ),
                             Space.X(10),
-                            Text(
-                              'These details must match passport and photo ID',
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 14,
-                                  color:Surface),
+                            Expanded(
+                              child: Text(
+                                'These details must match passport and photo ID',
+                              
+
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14,
+                                    color:Surface),
+                              ),
                             ),
                           ],
                         ),

@@ -13,6 +13,7 @@ import '../../core/utils/responses.dart';
 
 class ApiProvider {
   final String _airLabBaseUrl = "https://airlabs.co/api/v9/";
+  final String _airLabKey = "https://airlabs.co/api/v9/8bd89b9c-ab4c-4447-b39c-a8910eb4bc1c";
   HttpClient client = new HttpClient();
 
 
@@ -21,7 +22,7 @@ class ApiProvider {
     try {
 
       final response = await http.get(
-        Uri.parse(_airLabBaseUrl + 'suggest?q='+city+'&api_key=8bd89b9c-ab4c-4447-b39c-a8910eb4bc1c'),
+        Uri.parse(_airLabBaseUrl + 'suggest?q='+city+'&api_key='+_airLabKey),
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
 
 
@@ -53,7 +54,7 @@ class ApiProvider {
     try {
 
       final response = await http.get(
-        Uri.parse(_airLabBaseUrl + 'schedules?dep_iata='+dep_iata+'&arr_iata='+arr_iata+'&api_key=8bd89b9c-ab4c-4447-b39c-a8910eb4bc1c'),
+        Uri.parse(_airLabBaseUrl + 'schedules?dep_iata='+dep_iata+'&arr_iata='+arr_iata+'&api_key='+_airLabKey),
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
 
 
@@ -80,14 +81,14 @@ class ApiProvider {
     return responseJson;
   }
 
- // https://airlabs.co/api/v9/airlines?iata_code=AA&api_key=8bd89b9c-ab4c-4447-b39c-a8910eb4bc1c
+
   Future<dynamic> getAirline(iata) async {
     var responseJson;
 
     try {
 
       final response = await http.get(
-        Uri.parse(_airLabBaseUrl + 'airlines?iata_code='+iata+'&api_key=8bd89b9c-ab4c-4447-b39c-a8910eb4bc1c'),
+        Uri.parse(_airLabBaseUrl + 'airlines?iata_code='+iata+'&api_key='+_airLabKey),
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
       );
 

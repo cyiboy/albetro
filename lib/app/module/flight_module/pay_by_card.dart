@@ -127,7 +127,7 @@ class PayCard extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '₹ 50,760',
+                              P.flight.airline![0].price!,
                               style: TextStyle(
                                 color: textColor,
                                 fontSize: 16,
