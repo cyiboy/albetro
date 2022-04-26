@@ -13,7 +13,7 @@ Simple Flight Booking Mobile Appication Built With Flutter
 - ![Image](https://github.com/cyiboy/albetro/blob/main/cover.png)
 
 ## Video
-- ![Youtube](https://youtu.be/CuDrX3YchtY)
+- [Youtube](https://youtu.be/CuDrX3YchtY)
 
 ## Dependencies
 
