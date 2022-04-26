@@ -10,7 +10,7 @@ Simple Flight Booking Mobile Appication Built With Flutter
 - connect them with a polyline
 
 ## Image
-- [Image](https://s3-alpha.figma.com/hub/file/567242325/8d9924c9-4502-46b6-8df1-23365c60403f-cover.png)
+- [Image](https://github.com/cyiboy/albetro/blob/main/cover.png)
 
 ## Video
 - [Youtube](https://youtu.be/CuDrX3YchtY)
