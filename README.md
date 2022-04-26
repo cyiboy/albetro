@@ -1,17 +1,33 @@
 # albetro
 
-A new Flutter application.
+Simple Flight Booking Mobile Appication Built With Flutter
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+● option to select the origin and destination airport
+● Fetch list of airline schedules based on the selections above
+● Display them on a list
+● Show the origin and destination of the flight on a map upon selection of a schedule
+● connect them with a polyline
 
-A few resources to get you started if this is your first Flutter project:
+## Image
+- [Image](https://s3-alpha.figma.com/hub/file/567242325/8d9924c9-4502-46b6-8df1-23365c60403f-cover.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Video
+- [Youtube](https://youtu.be/CuDrX3YchtY)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Dependencies
+
+● google_maps_flutter - to show map on screen (Still in beta version)
+● flutter_datetime_picker 
+● flutter_svg  
+● get - to mantain state and make every widget independent using Getx
+● http - Handle http requesr
+ 
+## Installation
+Add your API_KEY and your own credentials from your GCP concle and [airline.co](https://airlabs.co/docs) to android and ios folders. Run following command in cmd and then run your app
+
+## Credits
+Kudos to [rkbhadauria](https://twitter.com/rkbhadauria) for this design.
+
+
 # albetro
