@@ -13,7 +13,7 @@ import '../../core/utils/responses.dart';
 
 class ApiProvider {
   final String _airLabBaseUrl = "https://airlabs.co/api/v9/";
-  final String _airLabKey = "https://airlabs.co/api/v9/8bd89b9c-ab4c-4447-b39c-a8910eb4bc1c";
+  final String _airLabKey = "https://airlabs.co/api/v9/YOUR-API-KEY";
   HttpClient client = new HttpClient();
 
 
